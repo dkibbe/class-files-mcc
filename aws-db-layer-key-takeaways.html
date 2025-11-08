@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adding a Database Layer on AWS — Key Takeaways</title>
+
+  <!-- Reveal.js core CSS from CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css" id="theme">
+
+  <style>
+    .reveal h1, .reveal h2, .reveal h3 { letter-spacing: 0.3px; }
+    .reveal .slides section { padding: 24px; }
+    .reveal ul { line-height: 1.4; }
+    .caption { font-size: 0.7em; opacity: 0.7; }
+    /* Optional widescreen helpers */
+    @media (min-aspect-ratio: 16/9) {
+      .reveal .slides section { padding: 16px 32px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Title -->
+      <section class="slide" data-transition="fade">
+        <h1>Adding a Database Layer on AWS</h1>
+        <h3>Key Takeaways</h3>
+        <p class="caption">AWS Academy Cloud Architecting — Module 06</p>
+      </section>
+
+      <!-- Outcomes -->
+      <section class="slide">
+        <h2>What This Module Enables You To Do</h2>
+        <ul>
+          <li>Compare relational vs. non‑relational databases and AWS services.</li>
+          <li>Identify when to use Amazon RDS and when to use Amazon DynamoDB.</li>
+          <li>Recognize AWS purpose‑built databases and common workloads.</li>
+          <li>Understand migration options (AWS DMS, AWS SCT).</li>
+          <li>Apply AWS Well‑Architected principles to the database layer.</li>
+        </ul>
+      </section>
+
+      <!-- Considerations -->
+      <section class="slide">
+        <h2>Database Layer Considerations</h2>
+        <ul>
+          <li><strong>Scalability:</strong> anticipate throughput; choose vertical, horizontal, or hybrid scale.</li>
+          <li><strong>Storage:</strong> size for GB/TB/PB and growth.</li>
+          <li><strong>Data characteristics:</strong> model, access patterns, and latency requirements drive selection.</li>
+          <li><strong>Durability &amp; compliance:</strong> availability, recovery, and regulatory needs.</li>
+          <li><strong>Relational vs. non‑relational:</strong> strict schema/vertical scale vs. flexible schema/horizontal scale.</li>
+          <li><strong>Managed services:</strong> offload undifferentiated heavy lifting; focus on application optimization.</li>
+        </ul>
+      </section>
+
+      <!-- RDS -->
+      <section class="slide">
+        <h2>Amazon RDS — Essentials</h2>
+        <ul>
+          <li>Managed relational service supporting multiple engines (incl. Aurora).</li>
+          <li><strong>Benefits:</strong> lower admin overhead, elastic scaling, high availability, strong security.</li>
+          <li><strong>Amazon Aurora:</strong> MySQL/PostgreSQL‑compatible, cloud‑built performance and availability; Serverless for on‑demand capacity.</li>
+          <li><strong>Sizing:</strong> pick instance families for CPU vs. memory needs.</li>
+          <li><strong>Security:</strong> VPC isolation, IAM, security groups, TLS, KMS, engine‑level controls.</li>
+        </ul>
+      </section>
+
+      <!-- RDS Proxy & Protection -->
+      <section class="slide">
+        <h2>RDS Proxy &amp; Data Protection</h2>
+        <ul>
+          <li><strong>RDS Proxy:</strong> connection pooling, faster failovers, IAM auth, Secrets Manager creds.</li>
+          <li><strong>Availability patterns:</strong>
+            <ul>
+              <li>Multi‑AZ: synchronous replication &amp; automatic failover.</li>
+              <li>Read replicas: async replication for read scaling.</li>
+            </ul>
+          </li>
+          <li><strong>Backups &amp; Encryption:</strong> automated backups/snapshots; encrypt at rest (KMS) &amp; in transit (TLS). Snapshot‑copy to encrypt legacy DBs.</li>
+        </ul>
+      </section>
+
+      <!-- DynamoDB -->
+      <section class="slide">
+        <h2>Amazon DynamoDB — Essentials</h2>
+        <ul>
+          <li>Fully managed, serverless NoSQL (key‑value &amp; document) with single‑digit ms latency.</li>
+          <li><strong>Model:</strong> tables, items, attributes; simple vs. composite keys.</li>
+          <li><strong>Indexes:</strong> GSI (eventual) &amp; LSI (eventual/strong) for flexible queries.</li>
+          <li><strong>Global tables:</strong> multi‑Region, multi‑active replication for global apps.</li>
+          <li><strong>Resilience &amp; security:</strong> encryption by default; point‑in‑time recovery; fine‑grained IAM; CloudTrail/Config.</li>
+        </ul>
+      </section>
+
+      <!-- Purpose-Built -->
+      <section class="slide">
+        <h2>Purpose‑Built Databases</h2>
+        <ul>
+          <li><strong>Amazon Redshift:</strong> analytics (OLAP), columnar, serverless option.</li>
+          <li><strong>Amazon DocumentDB:</strong> MongoDB‑compatible JSON documents.</li>
+          <li><strong>Amazon Keyspaces:</strong> Cassandra‑compatible wide‑column.</li>
+          <li><strong>Amazon MemoryDB for Redis:</strong> durable in‑memory with ultra‑low latency.</li>
+          <li><strong>Amazon Neptune:</strong> graph for highly connected data.</li>
+          <li><strong>Amazon Timestream:</strong> time‑series workloads.</li>
+          <li><strong>Amazon QLDB:</strong> immutable, cryptographically verifiable ledger.</li>
+        </ul>
+      </section>
+
+      <!-- Migration -->
+      <section class="slide">
+        <h2>Migrating Data into AWS Databases</h2>
+        <ul>
+          <li><strong>AWS Database Migration Service (DMS):</strong> managed migration/replication; homogeneous &amp; heterogeneous.</li>
+          <li><strong>Schema conversion:</strong> AWS SCT &amp; DMS Schema Conversion for code/schema translation.</li>
+          <li><strong>Use cases:</strong> move to RDS/Aurora; replicate to data lakes; scheduled or CDC pipelines.</li>
+        </ul>
+      </section>
+
+      <!-- Well-Architected -->
+      <section class="slide">
+        <h2>Well‑Architected for the DB Layer</h2>
+        <ul>
+          <li><strong>Performance efficiency:</strong> align engine/config with data characteristics and access patterns.</li>
+          <li><strong>Security:</strong> protect data at rest/in transit; enforce strong key management.</li>
+          <li><strong>Cost optimization:</strong> select resource types/sizes/count based on measured demand and usage.</li>
+        </ul>
+      </section>
+
+      <!-- Hands-on -->
+      <section class="slide">
+        <h2>Hands‑On Focus</h2>
+        <ul>
+          <li><strong>RDS lab:</strong> provision a DB, connect an app, practice secure/HA settings.</li>
+          <li><strong>Migration lab:</strong> import data from EC2 to RDS and retarget application connectivity.</li>
+        </ul>
+      </section>
+
+      <!-- Closing -->
+      <section class="slide">
+        <h2>Closing</h2>
+        <ul>
+          <li>Choose the right database for workload, data model, and growth.</li>
+          <li>Prefer managed services to accelerate delivery and improve resilience.</li>
+          <li>Design for availability, security, performance, and cost from day one.</li>
+        </ul>
+        <p class="caption">© AWS Academy (for instructional use)</p>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js core JS from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+  <script>
+    const deck = new Reveal({
+      hash: true,
+      slideNumber: true,
+      transition: 'fade',
+      controls: true,
+      progress: true,
+      center: true,
+      width: 1280,
+      height: 720,
+      margin: 0.04
+    });
+    deck.initialize();
+  </script>
+</body>
+</html>
